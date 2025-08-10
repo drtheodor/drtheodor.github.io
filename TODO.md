@@ -2,3 +2,6 @@
 - make citations not as accent blue
 - fix mobile layout of blog post reading page and the header
 - add a "#" symbol to the headers so they can be linked to 
+- add a site setting to customize background speed 
+- display tags and categories
+- display "time to read"
