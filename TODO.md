@@ -1,0 +1,4 @@
+- fix numbered lists (don't display numbers at all)
+- make citations not as accent blue
+- fix mobile layout of blog post reading page and the header
+- add a "#" symbol to the headers so they can be linked to 

@@ -1,11 +1,12 @@
 ---
 title: Writing a JSON Serialization Library
 description: work in progress
-heroImage: './assets/blog-placeholder-3.jpg'
+heroImage: '@blog/placeholder-3.jpg'
 pubDate: Apr 15 2025
 category: Programming
 tags:
   - Java
+draft: true
 ---
 
 ## The Why

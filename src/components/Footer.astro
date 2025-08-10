@@ -1,5 +1,6 @@
 ---
 import SocialLinks from "./SocialLinks.astro";
+import { SITE_FOOTER } from "src/consts";
 
 const today = new Date();
 ---
@@ -7,6 +8,6 @@ const today = new Date();
 <footer
 	class="text-slate-300 pt-8 pr-4 pb-8 pl-4 bg-linear-to-b from-slate-800/50 to-slate-950 text-center"
 >
-	&copy; {today.getFullYear()} Made with Astro 🚀 and incompetence.
+	&copy; {today.getFullYear()} {SITE_FOOTER}
 	<SocialLinks class="justify-center mt-6" />
 </footer>

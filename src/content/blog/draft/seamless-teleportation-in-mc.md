@@ -2,7 +2,7 @@
 title: Writing Seamless Teleportation for a Minecraft mod
 description: 'A story about how I wrote a seamless teleportation util for a minecraft mod.'
 pubDate: 'Jan 09 2025'
-heroImage: './assets/blog-placeholder-3.jpg'
+heroImage: '@blog/placeholder-3.jpg'
 category: Programming
 tags:
   - Java

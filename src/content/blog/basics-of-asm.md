@@ -2,7 +2,7 @@
 title: Basics of ObjectWeb ASM in Java
 description: 'The basics of ObjectWeb ASM in Java.'
 pubDate: 'Feb 13 2024'
-heroImage: './assets/blog-placeholder-1.jpg'
+heroImage: '@blog/placeholder-1.jpg'
 category: Programming
 tags:
     - Java

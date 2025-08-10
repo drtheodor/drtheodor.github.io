@@ -2,7 +2,7 @@
 title: Bytecode sorcery on SpigotMC and its derivatives
 description: 'A how-to guide to make "bytecode manipulation" and "Spigot" best friends.'
 pubDate: 'Aug 26 2024'
-heroImage: './assets/bytecode.webp'
+heroImage: '@blog/bytecode.webp'
 category: Programming
 tags:
     - Java

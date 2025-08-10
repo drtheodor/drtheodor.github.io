@@ -81,8 +81,15 @@ import StarfieldCanvas from "./StarfieldCanvas.astro";
 
         if (!initComplete) {
             generateAnimations();
-        }
 
+            drawOnCanvas({
+                draw: drawFg,
+                drawings: [...stars, ...comets],
+            });
+
+            canvas.classList.add(...loadedStyle);
+        }
+        
         drawOnCanvas({
             draw: drawBg,
             drawings: [nebula],
@@ -90,13 +97,6 @@ import StarfieldCanvas from "./StarfieldCanvas.astro";
         });
 
         bgCanvas.classList.add(...loadedStyle);
-
-        drawOnCanvas({
-            draw: drawFg,
-            drawings: [...stars, ...comets],
-        });
-
-        canvas.classList.add(...loadedStyle);
 
         initComplete = true;
     }

@@ -2,7 +2,7 @@
 title: My NixOS Nvidia Hyprland adventures
 description: 'A guide to Hyprland configuration on NixOS with Nvidia GPU.'
 pubDate: 'Jun 08 2024'
-heroImage: './assets/hyprland.png'
+heroImage: '@blog/hyprland.png'
 category: Programming
 tags:
     - Linux
@@ -101,4 +101,4 @@ Don't forget to create your own [user's file](https://github.com/DrTheodor/nixos
 
 Peace!
 
-![Result of my work](./assets/hyprlandbuild.png)
+![Result of my work](@blog/hyprlandbuild.png)

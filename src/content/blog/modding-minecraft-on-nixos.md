@@ -2,7 +2,7 @@
 title: Making Minecraft mods on NixOS
 description: 'A definitive guide on how to set up your dev environment to make Minecraft mods on NixOS.'
 pubDate: 'Aug 25 2024'
-heroImage: './assets/blog-placeholder-3.jpg'
+heroImage: '@blog/placeholder-3.jpg'
 category: Programming
 tags:
   - Java

@@ -1,5 +1,6 @@
 ---
 import SocialButton from "./SocialButton.astro";
+import { SOCIALS } from "src/consts";
 
 type Props = {
     class?: string;
@@ -9,27 +10,13 @@ const { class: className = "" } = Astro.props;
 ---
 
 <div class:list={["flex gap-4", className]}>
-    <SocialButton
-        icon="tabler:brand-mastodon"
-        link="https://fosstodon.org/@drtheo"
-        text="Follow on Mastodon"
-    />
-
-    <SocialButton
-        icon="tabler:brand-x"
-        link="https://x.com/DrTheodor_"
-        text="Follow on Twitter"
-    />
-
-    <SocialButton
-        icon="tabler:brand-bluesky"
-        link="https://bsky.app/profile/theo.is-a.dev"
-        text="Follow on Bluesky"
-    />
-
-    <SocialButton
-        icon="tabler:brand-github"
-        link="https://github.com/drtheodor"
-        text="Follow on GitHub"
-    />
+    { SOCIALS.map(social => {
+        return (
+            <SocialButton
+                icon={social.icon}
+                link={social.url}
+                text={social.text}
+            />           
+        );
+    }) }
 </div>

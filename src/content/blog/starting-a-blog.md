@@ -2,7 +2,7 @@
 title: Starting a blog
 description: 'The start of a journey.'
 pubDate: 'Feb 06 2024'
-heroImage: './assets/blog-placeholder-2.jpg'
+heroImage: '@blog/placeholder-2.jpg'
 category: Rants
 ---
 

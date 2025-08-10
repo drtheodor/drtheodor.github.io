@@ -2,7 +2,7 @@
 title: How I ported a Fabric mod to Forge without rewriting it
 description: 'An incredibly overcomplicated way of porting Fabric mods to Forge.'
 pubDate: 'Aug 25 2024'
-heroImage: './assets/blog-placeholder-1.jpg'
+heroImage: '@blog/placeholder-1.jpg'
 category: Programming
 tags:
   - Java

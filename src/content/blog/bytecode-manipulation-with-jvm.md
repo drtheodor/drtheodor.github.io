@@ -2,7 +2,7 @@
 title: Bytecode manipulation in JVM
 description: 'An introduction to bytecode manipulation with Java!'
 pubDate: 'Feb 09 2024'
-heroImage: './assets/bytecode.webp'
+heroImage: '@blog/bytecode.webp'
 category: Programming
 tags:
     - Java
