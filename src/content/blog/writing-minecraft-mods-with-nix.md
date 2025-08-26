@@ -2,7 +2,7 @@
 title: Writing Minecraft mods with Nix (Updated)
 description: 'A definitive guide on how to set up your dev environment to make Minecraft mods with NixOS.'
 pubDate: 'Aug 26 2025'
-heroImage: '@blog/nixplusmc.png'
+heroImage: '@blog/nixplusmc2.png'
 category: Programming
 tags:
   - Java
@@ -115,6 +115,8 @@ Do not worry, this procedure is needed to be done only once.
 Now, open your project (if you haven't already), then go to `File > Project Structure`, in the popup go to "Project", and set the "SDK"  to the JDK from the "Detected SDKs" dropdown. This is the JDK that we've installed through the flake.
 
 Then, go to `File > Settings > Build, Execution, Deployment > Build Tools > Gradle` and set "Gradle JVM" to be "Project SDK".
+
+If you're using direnv, make sure to exclude the `.direnv` folder by right-clicking on it, then clicking `Mark Directory As > Excluded`.
 
 You can re-open the IDE normally one.
 
