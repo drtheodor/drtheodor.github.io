@@ -1,7 +1,7 @@
 ---
 title: Writing Minecraft mods with Nix (Updated)
 description: 'A definitive guide on how to set up your dev environment to make Minecraft mods with NixOS.'
-pubDate: 'Aug 25 2024'
+pubDate: 'Aug 26 2025'
 heroImage: '@blog/nixplusmc.png'
 category: Programming
 tags:
