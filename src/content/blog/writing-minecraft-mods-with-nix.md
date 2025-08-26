@@ -12,7 +12,7 @@ tags:
 
 Surprisingly enough, my most popular blog post was about modding Minecraft on NixOS.
 
-Recently, an acquaintance of mine, [Wres](https://github.com/MrWrees) has asked me how I set up my dev environment for MC modding.
+Recently, an acquaintance of mine, [Wrees](https://github.com/MrWrees) has asked me how I set up my dev environment for MC modding.
 
 Apparently, he found out my blog post!
 
