@@ -93,6 +93,7 @@ First of all, we're gonna install some plugins for InteliJ.
 You're gonna need these plugins:
 - [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development)
 
+
 If you're going the direnv route, you also going to need the following:
 - [Direnv Integration](https://plugins.jetbrains.com/plugin/15285-direnv-integration) (if you're going the direnv route)
 
