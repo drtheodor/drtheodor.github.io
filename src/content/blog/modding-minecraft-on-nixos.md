@@ -2,16 +2,21 @@
 title: Making Minecraft mods on NixOS
 description: 'A definitive guide on how to set up your dev environment to make Minecraft mods on NixOS.'
 pubDate: 'Aug 25 2024'
-heroImage: '@blog/placeholder-3.jpg'
+heroImage: '@blog/nixplusmc.png'
 category: Programming
 tags:
   - Java
   - Minecraft
+  - NixOS
 ---
+
+(not affiliated with Microsoft or Mojang, NixOS art from [nixos-artwork](https://github.com/NixOS/nixos-artwork/issues/50))
 
 # Intro
 I've been making Minecraft mods (and plugins!) for a while (for around 4 years!) now 
 and about 2 years ago I started using NixOS as my main Linux distro.
+
+> Note: This post is a bit outdated. I've included a flake at the end of this post that should work on the latest versions of Minecraft & Nix(OS).
 
 # So... what's the problem?
 When running the beloved "Minecraft Client" task I was met with an unpleasant surprise. That being a GL error.
@@ -116,6 +121,9 @@ After some experimentation I came up with this flake:
 As you see I use a special Java package. I use JBR (JetBrains Runtime) as it has DCEVM with good debug capabilities (hot reload).
 
 Here's the said package's content, which was copied from nix-pkgs:
+
+<details>
+<summary>Very big and scary package</summary>
 
 ```nix
 { lib
@@ -264,7 +272,10 @@ openjdk17.overrideAttrs (oldAttrs: rec {
 })
 ```
 
-To finish the set up, open `File > Settings > Build System > Gradle`. You'll see a fiel, where you can choose java installation. 
+</details>
+
+
+To finish the set up, open `File > Settings > Build System > Gradle`. You'll see a drop down menu, where you can choose your java installation. 
 Make sure to choose `JAVA_HOME`, which was set by the flake automatically.
 
 When opening the project, run IntelliJ from terminal while in the dev environment. This will make sure that the environment variables are properly passed on.
@@ -273,6 +284,10 @@ All of this will work to just double click `:runClient` in the Gradle tab and vo
 
 However, if you want to run the "Minecraft Client" run configration, provided by Fabric Loom or Forge Gradle, you'd need to set your Java installation accordinly in `File > Project Settings > SDKs`.
 
+
+## Update (23rd of August, 2025)
+Not so long ago, [Wrees](https://github.com/MrWrees) contacted me about a problem he was having of following this blog post.
+So I've decided to revisit it. The updated guide can be found [here](/blog/writing-minecraft-mods-on-nix/).
 
 # Outro
 
