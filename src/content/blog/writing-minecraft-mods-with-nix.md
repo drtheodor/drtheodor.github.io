@@ -71,6 +71,8 @@ Your `flake.nix` should be the following:
 
 This flake is locked on Nix packages 25.05, where `jetbrains.jdk-no-jcef` is JetBrains' JDK 21, which is commonly used for MC modding on versions 1.20 and above.
 
+The reason why we're using JetBrains' JDK is because JBR supports DCEVM, which allows for hotswapping classes.
+
 - `libGL` is a required dependency, without it, the game won't launch.
 - `flite` is used in Minecraft for TTS, you can remove it if you don't need it.
 - `libpulseaudio` is required for the game to play sounds, without it no sounds or music will play.
