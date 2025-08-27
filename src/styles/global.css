@@ -43,7 +43,7 @@
 	}
 
 	a {
-		@apply text-cyan-500 text-shadow-[0_0px_0px_rgb(var(--color-cyan-400))] hover:text-shadow-cyan-400;
+		@apply text-primary text-shadow-[0_0px_0px_rgb(var(--color-cyan-400))] hover:text-shadow-cyan-400;
 	}
 
 	ul {
