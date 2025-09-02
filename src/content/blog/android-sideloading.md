@@ -14,11 +14,13 @@ Not so long ago, a friend of mine sent me news about a [new Android "security" f
 As this feature isn't out yet globally (and I don't live in the countries where that feature rolls out initially), this is more of a draft and a list of ideas that could possibly allow to automate installation of patched APKs after this security update rolls out globally.
 
 As far as I've understood from the official Android Developers blog post, this is how it works:
-1. You sign up
-2. You put your package name
-3. You put your public keys
-4. You sign the APK with your private key and upload it for verification _once_
+№1. You sign up
+№2. You put your package name
+№3. You put your public keys
+№4. You sign the APK with your private key and upload it for verification _once_
+
 Ta-da! Your app should be installable.
+
 
 > Also, I've heard somewhere that hobbyist accounts (the one that doesn't require a 25$ fee for registration) can only have so many installations for one package name, but I'm not sure if that's true or not (can't find the source either). 
 > But, at the same time, they say that "developers will have the same freedom to distribute their apps directly to users through sideloading or to use any app store they prefer", which doesn't really match that up.
