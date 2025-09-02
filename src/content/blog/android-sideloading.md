@@ -2,7 +2,7 @@
 title: Android Sideloading
 description: 'On how to circumvent the android sideloading "security" for distrubution of patched APKs.'
 pubDate: 'Sep 02 2025'
-heroImage: '@blog/placeholder-4.jpg'
+heroImage: '@blog/android-sideloading.png'
 category: Programming
 tags:
     - Java
