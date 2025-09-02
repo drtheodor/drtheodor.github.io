@@ -49,3 +49,7 @@ ADB should still be able to install an app to a connected phone without registra
 Making a wrapper around ADB and wiring it to install an app locally should circumvent all the registration, signing, etc.
 
 Again, for convenience sake, if an android app is made that can open Android APKs and run ADB on them, this would allow to bypass all the security checks.
+
+## Sources
+- [Introducing the Android Developer Console](https://developer.android.com/developer-verification/assets/pdfs/introducing-the-android-developer-console.pdf) (pdf)
+- [Elevating Android security](https://android-developers.googleblog.com/2025/08/elevating-android-security.html) (blog post)
