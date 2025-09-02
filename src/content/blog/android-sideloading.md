@@ -49,7 +49,9 @@ ADB should still be able to install an app to a connected phone without registra
 Making a wrapper around ADB and wiring it to install an app locally should circumvent all the registration, signing, etc.
 
 Again, for convenience sake, if an android app is made that can open Android APKs and run ADB on them, this would allow to bypass all the security checks.
+ADB _can_ be ran on Android, as seen in [this](https://www.reddit.com/r/AndroidQuestions/comments/1dg4xuj/any_way_to_run_adb_commands_from_the_phone/) reddit thread, where someone was able to run ADB through Termux!
 
 ## Sources
 - [Introducing the Android Developer Console](https://developer.android.com/developer-verification/assets/pdfs/introducing-the-android-developer-console.pdf) (pdf)
 - [Elevating Android security](https://android-developers.googleblog.com/2025/08/elevating-android-security.html) (blog post)
+- [Any way to run ADB commands from the phone without root?](https://www.reddit.com/r/AndroidQuestions/comments/1dg4xuj/any_way_to_run_adb_commands_from_the_phone/) (r/AndroidQuestion)
