@@ -6,7 +6,7 @@
 
 @theme {
 	--font-doto: "Doto", serif;
-	--color-primary: rgb(1 97 239);
+	--color-primary: #b1c4e2;
 	--color-secondary: rgb(1 84 207);
 	--color-accent: rgb(109 40 217);
 	--color-background: rgb(8 8 8);
@@ -40,6 +40,10 @@
 
 	blockquote {
 		@apply border-l-4 border-solid border-primary p-0 pl-5 m-0 text-xl;
+	}
+
+	a {
+		@apply text-primary text-shadow-[0_0px_0px_rgb(var(--color-cyan-400))] hover:text-shadow-cyan-400;
 	}
 
 	ul {

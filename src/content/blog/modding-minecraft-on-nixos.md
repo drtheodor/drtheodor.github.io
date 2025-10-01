@@ -287,7 +287,7 @@ However, if you want to run the "Minecraft Client" run configration, provided by
 
 ## Update (23rd of August, 2025)
 Not so long ago, [Wrees](https://github.com/MrWrees) contacted me about a problem he was having of following this blog post.
-So I've decided to revisit it. The updated guide can be found [here](/blog/writing-minecraft-mods-on-nix/).
+So I've decided to revisit it. The updated guide can be found [here](/blog/writing-minecraft-mods-with-nix/).
 
 # Outro
 
