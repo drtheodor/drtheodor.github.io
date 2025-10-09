@@ -18,7 +18,7 @@ So, after a few experiments, I have come up with this script that allows you to 
 
 It is a [TamperMonkey](http://tampermonkey.net/) script, which is commonly used for userscripts like this one!
 
-- First, install [TamperMonkey](http://tampermonkey.net/). If you're using a chrome-based browser like brave, vivaldi or opera you might need to follow [those](https://www.tampermonkey.net/faq.php#Q209) instructions after installation.
+- First, install [TamperMonkey](http://tampermonkey.net/). If you're using a chrome-based browser like Brave, Vivaldi or Opera you might need to follow [those](https://www.tampermonkey.net/faq.php#Q209) instructions after installation. For mobile users, it's available with [Firefox](https://addons.mozilla.org/en-US/android/addon/tampermonkey/), Edge and Vivaldi (as far as I'm aware).
 - Second, get the script [here](https://theo.is-a.dev/imgur-uk.user.js), and just press "Install" (you might also need to enable it) and voila!
 
 This script uses duckduckgo's image proxy.
