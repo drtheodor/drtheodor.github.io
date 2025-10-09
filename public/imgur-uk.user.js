@@ -12,9 +12,33 @@
 (function() {
     'use strict';
 
-    const allATags = document.querySelectorAll('img');
-    allATags.forEach((el,idx) => {
-        console.log(el);
-        el.src = el.src.replace ("i.imgur.com", "external-content.duckduckgo.com/iu/?u=https://i.imgur.com");;
+    function handleImage(el) {
+        el.src = el.src.replace ("i.imgur.com", "external-content.duckduckgo.com/iu/?u=https://i.imgur.com");
+    }
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === 1) {
+                    if (node.tagName === 'IMG') {
+                        handleImage(node);
+                    } else {
+                        const imgElements = node.querySelectorAll && node.querySelectorAll('img');
+
+                        if (imgElements) {
+                            imgElements.forEach(handleImage);
+                        }
+                    }
+                }
+            });
+        });
     });
+
+    // Start observing
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    document.querySelectorAll('img').forEach(handleImage);
 })();
