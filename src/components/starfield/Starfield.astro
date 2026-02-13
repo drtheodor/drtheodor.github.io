@@ -2,7 +2,11 @@
 import StarfieldCanvas from "./StarfieldCanvas.astro";
 ---
 
-<div class="starfield overflow-hidden bg-background w-full h-full fixed -z-1" id="starfield-container" transition:persist>
+<div
+    class="starfield overflow-hidden bg-background w-full h-full fixed -z-1"
+    id="starfield-container"
+    transition:persist
+>
     <StarfieldCanvas class="-z-2" id="starfield-bg" />
     <StarfieldCanvas class="-z-1" id="starfield-fg" />
 
@@ -12,7 +16,12 @@ import StarfieldCanvas from "./StarfieldCanvas.astro";
 <script>
     import type { Range } from "./util";
 
-    const loadedStyle: string[] = ["opacity-100", "transition-opacity", "duration-1000", "ease-in-out"];
+    const loadedStyle: string[] = [
+        "opacity-100",
+        "transition-opacity",
+        "duration-1000",
+        "ease-in-out",
+    ];
 
     const nebulaIntensity = 10;
     const bgColor = "rgb(8,8,8)";
@@ -89,7 +98,7 @@ import StarfieldCanvas from "./StarfieldCanvas.astro";
 
             canvas.classList.add(...loadedStyle);
         }
-        
+
         drawOnCanvas({
             draw: drawBg,
             drawings: [nebula],
@@ -114,6 +123,7 @@ import StarfieldCanvas from "./StarfieldCanvas.astro";
     }
 
     function onResize() {
+        initComplete = false;
         init();
     }
 

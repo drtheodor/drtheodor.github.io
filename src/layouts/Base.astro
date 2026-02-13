@@ -1,27 +1,40 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import type { ComponentProps } from 'astro/types';
-import Background from '../components/Background.astro';
+import BaseHead from "@/components/BaseHead.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/Hero.astro";
+import Starfield from "@/components/starfield/Starfield.astro";
+import type { ComponentProps } from "astro/types";
+import { HEADER } from "@/config.ts";
 
-type Props = { main?: boolean, class?: string, image?: string } & ComponentProps<typeof BaseHead>;
+type Props = {
+    main?: boolean;
+    class?: string;
+} & ComponentProps<typeof BaseHead>;
 
-const { main = false, class: className = "", image, ...props } = Astro.props;
+const { main = false, class: className = "", ...props } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="h-full">
-	<head>
-		<BaseHead {...props} image={image} />
-	</head>
-	<body class="text-slate-50 bg-slate-900 w-full h-full m-0 p-0 text-left text-xl/[1.7]">
-        <Background showBlackhole={main} />
-		<Header />
-        
-		<main class:list={[className]}>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+<html lang="en">
+    <head>
+        <BaseHead {...props} />
+    </head>
+    <body>
+        <Starfield />
+        <div class="drawer mx-auto max-w-[100rem] lg:drawer-open">
+            <div class="drawer-content">
+                <Header items={HEADER} />
+                <div class="relative px-6 min-h-screen">
+                    {main && <Hero />}
+                    <div
+                        class="prose prose-sm md:prose-base text-md min-w-full w-full my-10 p-10 bg-base-100 rounded-box"
+                    >
+                        <slot />
+                    </div>
+                </div>
+                <Footer />
+            </div>
+        </div>
+    </body>
 </html>

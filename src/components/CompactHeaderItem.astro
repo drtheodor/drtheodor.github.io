@@ -1,0 +1,29 @@
+---
+import { type HeaderItem } from "@/config";
+
+interface Props {
+    name: string;
+    item: HeaderItem;
+}
+
+const { name, item } = Astro.props;
+---
+
+<li>
+    {
+        typeof item === "object" ? (
+            <a href={item.link}>
+                {item.prefix} {name}
+                {item.items && (
+                    <ul class="p-2">
+                        {Object.entries(item.items).map(([name, item]) => (
+                            <Astro.self name={name} item={item} />
+                        ))}
+                    </ul>
+                )}
+            </a>
+        ) : (
+            <a href={item}>{name}</a>
+        )
+    }
+</li>

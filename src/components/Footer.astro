@@ -1,13 +1,17 @@
 ---
 import SocialLinks from "./SocialLinks.astro";
-import { SITE_FOOTER } from "src/consts";
-
-const today = new Date();
 ---
 
 <footer
-	class="text-slate-300 pt-8 pr-4 pb-8 pl-4 bg-linear-to-b from-slate-800/50 to-slate-950 text-center"
+    class="footer sm:footer-horizontal bg-base-100 text-neutral-content items-center p-4"
 >
-	&copy; {today.getFullYear()} {SITE_FOOTER}
-	<SocialLinks class="justify-center mt-6" />
+    <aside class="grid-flow-col items-center">
+        <p>
+            Not so Copyright © {new Date().getFullYear()} - made with with Astro 🚀
+            and absolute incompetence.
+        </p>
+    </aside>
+    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <SocialLinks />
+    </nav>
 </footer>

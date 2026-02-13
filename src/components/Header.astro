@@ -1,17 +1,70 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
-import SocialLinks from "./SocialLinks.astro";
+import HeaderItem from "./HeaderItem.astro";
+import CompactHeaderItem from "./CompactHeaderItem.astro";
+
+import { type HeaderItems } from "@/config";
+
+interface Props extends HeaderItems {}
+
+const { items } = Astro.props;
 ---
 
-<header class="m-0 pt-0 pb-0 pr-2 pl-2 text-white">
-	<nav class="flex items-center justify-between pt-4 pb-8">
-		<h2 class="m-0 text-2xl p-2"><a href="/" data-astro-reload>{SITE_TITLE}</a></h2>
-		<div>
-			<HeaderLink href="/" class="p-2">Home</HeaderLink>
-			<HeaderLink href="/blog" class="p-2">Blog</HeaderLink>
-			<HeaderLink href="/about" class="p-2">About</HeaderLink>
-		</div>
-		<SocialLinks class="max-[720px]:hidden" />
-	</nav>
-</header>
+<div
+    class="bg-base-100/80 text-base-content sticky top-0 z-30 flex h-16 w-full [transform:translate3d(0,0,0)] justify-center backdrop-blur transition-shadow duration-100 print:hidden"
+>
+    <nav class="navbar w-full py-0">
+        <div class="navbar shadow-sm">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div
+                        tabindex="0"
+                        role="button"
+                        class="btn btn-ghost lg:hidden"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16"></path>
+                        </svg>
+                    </div>
+                    <ul
+                        tabindex="-1"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                    >
+                        {
+                            items &&
+                                Object.entries(items).map(([name, item]) => (
+                                    <CompactHeaderItem
+                                        name={name}
+                                        item={item}
+                                    />
+                                ))
+                        }
+                    </ul>
+                </div>
+                <a href="/" class="btn btn-ghost text-xl">Theo's Workbench</a>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    {
+                        items &&
+                            Object.entries(items).map(([name, item]) => (
+                                <HeaderItem name={name} item={item} />
+                            ))
+                    }
+                </ul>
+            </div>
+            <div class="navbar-end">
+                <!-- <a class="btn">Button</a> -->
+            </div>
+        </div>
+    </nav>
+</div>

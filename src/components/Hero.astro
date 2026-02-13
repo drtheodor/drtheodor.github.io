@@ -1,0 +1,14 @@
+---
+import MagicText from "./MagicText.astro";
+---
+
+<div class="flex justify-center w-full h-[20vh] mb-[30vw]">
+    <div
+        class="absolute block w-full max-w-[100vh] aspect-square bg-black -z-1 rounded-[50%] -translate-y-[50%] drop-shadow-[0_0_5rem_#ff9204]"
+    >
+    </div>
+    <MagicText
+        text={["Hello.", "I'm Theo."]}
+        class="text-white font-magic mt-[6vh] text-center lg:text-9xl md:text-7xl text-5xl w-[20vw] h-full flex items-center justify-center"
+    />
+</div>

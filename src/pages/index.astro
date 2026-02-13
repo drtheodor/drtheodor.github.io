@@ -1,9 +1,6 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import MagicText from "../components/MagicText.astro";
-import Starfield from "../components/starfield/Starfield.astro";
-import Base from "../layouts/Base.astro";
-import TextContent from "../components/TextContent.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/config";
+import Base from "@/layouts/Base.astro";
 ---
 
 <Base
@@ -11,15 +8,4 @@ import TextContent from "../components/TextContent.astro";
     description={SITE_DESCRIPTION}
     main={true}
     class="h-full"
->
-    <div class="h-100">
-        <MagicText
-            text="Hello.//I'm Theo."
-            class="text-white font-doto text-center m-5 mt-0 text-9xl"
-        />
-    </div>
-
-    <TextContent>
-        Hmm... What should I write here?
-    </TextContent>
-</Base>
+/>

@@ -1,50 +1,54 @@
 ---
 interface Props {
-  text: string;
-  duration?: number;
-  delay?: number;
-  class: string;
+    text: string[];
+    duration?: number;
+    delay?: number;
+    class: string;
 }
 
-const { text, duration = 750, delay = 500, class: className } = Astro.props;
-const texts = text.split("//");
+const {
+    text: texts,
+    duration = 750,
+    delay = 500,
+    class: className,
+} = Astro.props;
 ---
 
 <h1
-  id="fading-header"
-  class:list={[
-    className,
-    "opacity-100",
-    "transition-opacity",
-    "ease-in-out",
-    `duration-${duration}`,
-  ]}
+    id="fading-header"
+    class:list={[
+        className,
+        "opacity-100",
+        "transition-opacity",
+        "ease-in-out",
+        `duration-${duration}`,
+    ]}
 >
-  {texts[0]}
+    {texts[0]}
 </h1>
 
 <script define:vars={{ texts, duration, delay }} is:inline>
-  let index = 0;
+    let index = 0;
 
-  const header = document.getElementById("fading-header");
+    const header = document.getElementById("fading-header");
 
-  function changeText() {
-    // Fade out the text
-    header.classList.add("opacity-0!");
+    function changeText() {
+        // Fade out the text
+        header.classList.add("opacity-0!");
 
-    // Wait for the fade-out transition to complete
-    setTimeout(() => {
-      // Change the text
-      header.textContent = texts[index++];
+        // Wait for the fade-out transition to complete
+        setTimeout(() => {
+            // Change the text
+            header.textContent = texts[index++];
 
-      // Fade in the new text
-      header.classList.remove("opacity-0!");
+            // Fade in the new text
+            header.classList.remove("opacity-0!");
 
-      if (index != texts.length) setTimeout(changeText, delay - duration);
-    }, duration); // Wait 1 second (same as the transition duration)
-  }
+            if (index != texts.length) setTimeout(changeText, delay - duration);
+        }, duration); // Wait 1 second (same as the transition duration)
+    }
 
-  document.addEventListener("astro:page-load", (_) =>
-    setTimeout(changeText, delay),
-  );
+    document.addEventListener("astro:page-load", (_) =>
+        setTimeout(changeText, delay),
+    );
 </script>

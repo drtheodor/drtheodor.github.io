@@ -1,55 +1,44 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
 import Base from "./Base.astro";
 import { Image } from "astro:assets";
-import TextContent from "../components/TextContent.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<Base
-	class="w-[calc(100% - 2em)] max-w-full m-auto"
-	title={title}
-	description={description}
-	image={heroImage.src}
->
-	<article>
-		<div class="w-full">
-			{
-				heroImage && (
-					<Image
-						width={1020}
-						height={510}
-						class="block mt-0 mb-0 mr-auto ml-auto rounded-xl hero-shadow"
-						src={heroImage}
-						alt=""
-					/>
-				)
-			}
-		</div>
-		<div class="prose w-180 max-w-[calc(100% - 2em)] m-auto p-2">
-			<div class="pt-4 pb-4 leading-4 text-center">
-				<div class="date mb-0 text-slate-400">
-					<FormattedDate date={pubDate} />
-					{
-						updatedDate && (
-							<div class="italic">
-								Last updated on{" "}
-								<FormattedDate date={updatedDate} />
-							</div>
-						)
-					}
-				</div>
-				<h1 class="mt-2 mb-2">{title}</h1>
-				<hr class="border-solid border-t-2 border-slate-500" />
-			</div>
+<Base title={title} description={description} image={heroImage.src}>
+    <article>
+        <div class="w-full">
+            {
+                heroImage && (
+                    <Image
+                        width={1020}
+                        height={510}
+                        class="block mt-0 mb-0 mr-auto ml-auto rounded-xl hero-shadow"
+                        src={heroImage}
+                        alt=""
+                    />
+                )
+            }
+        </div>
+        <div class="pt-4 pb-4 leading-4 text-center m-auto p-2">
+            <div class="date mb-0 text-slate-400">
+                <FormattedDate date={pubDate} />
+                {
+                    updatedDate && (
+                        <div class="italic">
+                            Last updated on <FormattedDate date={updatedDate} />
+                        </div>
+                    )
+                }
+            </div>
+            <h1>{title}</h1>
+            <hr class="border-solid border-t-2 border-slate-500" />
+        </div>
 
-			<TextContent>
-				<slot />
-			</TextContent>
-		</div>
-	</article>
+        <slot />
+    </article>
 </Base>
