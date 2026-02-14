@@ -1,17 +1,20 @@
 ---
 import "@/styles/global.css";
-import { SITE_TITLE } from "@/config";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/config";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image } = Astro.props;
+const { title: argTitle, description: argDesc, image } = Astro.props;
+
+const title = argTitle ? `${argTitle} | ${SITE_TITLE}` : SITE_TITLE;
+const description = argDesc || SITE_DESCRIPTION;
 ---
 
 <!-- Global Metadata -->
@@ -30,7 +33,7 @@ const { title, description, image } = Astro.props;
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
+<title>title</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 

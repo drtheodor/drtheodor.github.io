@@ -272,15 +272,21 @@ import Prose from "../Prose.astro";
 
         const owner = ownerInput.value;
         const repo = repoInput.value;
+        const position = [xInput.value, yInput.value].map((val) =>
+            parseInt(val),
+        );
+        const size = [wInput.value, hInput.value].map((val) => parseInt(val));
+
+        const img = imgInput.value;
+        const rotation = parseInt(rotationInput.value);
 
         const value = JSON.stringify(
             {
-                position: [0, 0],
-                size: [256, 256],
-                rotation: 0,
-                image: "",
-                avatar: "github",
-                profile: "github",
+                position: position,
+                size: size,
+                rotation: rotation,
+                image: img,
+                displayName: nameInput.value ? nameInput.value : null,
                 quote: quoteInput.value ? quoteInput.value : null,
             },
             null,
@@ -288,7 +294,7 @@ import Prose from "../Prose.astro";
         );
 
         window.open(
-            `https://github.com/${owner}/${repo}/new/main?filename=${repo}.json&value=${encode(value)}`,
+            `https://github.com/${owner}/${repo}/new/main?filename=${owner}.json&value=${encode(value)}`,
             "_blank",
         );
     });
