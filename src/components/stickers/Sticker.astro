@@ -1,0 +1,75 @@
+---
+import { type Sticker } from "@/config.ts";
+
+interface Props extends Sticker {
+    id?: string;
+    idx?: number;
+    stickerId: string;
+}
+
+const {
+    id,
+    idx,
+    stickerId,
+    position,
+    size,
+    rotation,
+    image,
+    avatar: avatarType,
+    profile: profileType,
+    displayName,
+    quote,
+} = Astro.props;
+
+const avatarUrl =
+    avatarType === "github"
+        ? `https://avatars.githubusercontent.com/${stickerId}`
+        : avatarType;
+
+const profileUrl =
+    profileType === "github" ? `https://github.com/${stickerId}` : profileType;
+
+const name = displayName ? `~${displayName}` : `@${stickerId}`;
+---
+
+<div
+    class="absolute w-auto h-auto tooltip"
+    style={{
+        left: `${position[0]}%`,
+        top: `${position[1]}%`,
+        "z-index": `${idx}`,
+    }}
+    id={id && `sticker-${id}-xform`}
+>
+    <div class="tooltip-content">
+        <div class="text-primary text-lg font-bold">
+            <div class="avatar">
+                <div class="w-8 rounded-full">
+                    <img src={avatarUrl} id={id && `sticker-${id}-avatar`} />
+                </div>
+            </div>
+            <span id={id && `sticker-${id}-name`}>{name}</span>
+        </div>
+    </div>
+    <div class="tooltip tooltip-bottom">
+        {
+            quote && (
+                <div class="tooltip-content font-light italic">
+                    “<span id={id && `sticker-${id}-quote`}>{quote}</span>”
+                </div>
+            )
+        }
+        <a href={profileUrl} target="_blank" id={id && `sticker-${id}-profile`}>
+            <img
+                src={image}
+                width={size[0]}
+                height={size[1]}
+                class="object-cover max-w-none"
+                style={{
+                    rotate: `${rotation}deg`,
+                }}
+                id={id && `sticker-${id}-img`}
+            />
+        </a>
+    </div>
+</div>

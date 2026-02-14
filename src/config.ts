@@ -1,6 +1,17 @@
 export const SITE_TITLE = "Theo's Workbench";
 export const SITE_DESCRIPTION = "Welcome to my website!";
-export const SITE_FOOTER = "Made with Astro 🚀 and absolute incompetence.";
+export const SITE_FOOTER = `Not so Copyright © ${new Date().getFullYear()} - Made with Astro 🚀 and absolute (frontend) incompetence.`;
+
+export interface Sticker {
+  position: [number, number];
+  size: [number, number];
+  rotation: number;
+  image: string;
+  avatar: "github" | string;
+  profile: "github" | string;
+  displayName?: string;
+  quote?: string;
+}
 
 export interface HeaderItems {
   items?: Record<string, HeaderItem>;
@@ -49,11 +60,11 @@ export const SOCIALS: Social[] = [
     url: "https://x.com/DrTheodor_",
     text: "Follow on Twitter (X)",
   },
-  {
-    icon: "tabler:brand-bluesky",
-    url: "https://bsky.app/profile/theo.is-a.dev",
-    text: "Follow on Bluesky",
-  },
+  // {
+  //   icon: "tabler:brand-bluesky",
+  //   url: "https://bsky.app/profile/theo.is-a.dev",
+  //   text: "Follow on Bluesky",
+  // },
   {
     icon: "tabler:brand-github",
     url: "https://github.com/drtheodor",

@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import Sticker from "./Sticker.astro";
+import StickerForm from "./StickerForm.astro";
+
+interface Props {
+    form?: boolean;
+}
+
+const { form = false } = Astro.props;
+
+const stickers = await getCollection("stickers");
+---
+
+<div class="bg-base-200 rounded-box p-10 relative">
+    <h1 class="w-full text-center font-extrabold text-4xl">
+        Sticker Board!
+
+        {
+            !form && (
+                <a class="btn btn-soft btn-circle" href="/stickers">
+                    +
+                </a>
+            )
+        }
+    </h1>
+    <div class="h-screen overflow-x-clip relative max-w-screen w-full">
+        {
+            stickers.map((sticker, idx) => (
+                <Sticker
+                    idx={idx + 2}
+                    stickerId={sticker.id}
+                    {...sticker.data}
+                />
+            ))
+        }
+
+        {
+            form && (
+                <Sticker
+                    id="preview"
+                    idx={stickers.length + 1}
+                    stickerId=""
+                    position={[0, 0]}
+                    size={[0, 0]}
+                    quote=" "
+                />
+            )
+        }
+    </div>
+
+    {form && <StickerForm />}
+</div>

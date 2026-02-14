@@ -27,9 +27,7 @@ const { main = false, class: className = "", ...props } = Astro.props;
                 <Header items={HEADER} />
                 <div class="relative px-6 min-h-screen">
                     {main && <Hero />}
-                    <div
-                        class="prose prose-sm md:prose-base text-md min-w-full w-full my-10 p-10 bg-base-100 rounded-box"
-                    >
+                    <div class="my-10">
                         <slot />
                     </div>
                 </div>

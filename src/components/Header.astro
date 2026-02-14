@@ -2,7 +2,7 @@
 import HeaderItem from "./HeaderItem.astro";
 import CompactHeaderItem from "./CompactHeaderItem.astro";
 
-import { type HeaderItems } from "@/config";
+import { SITE_TITLE, type HeaderItems } from "@/config";
 
 interface Props extends HeaderItems {}
 
@@ -50,7 +50,7 @@ const { items } = Astro.props;
                         }
                     </ul>
                 </div>
-                <a href="/" class="btn btn-ghost text-xl">Theo's Workbench</a>
+                <a href="/" class="btn btn-ghost text-xl">{SITE_TITLE}</a>
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">

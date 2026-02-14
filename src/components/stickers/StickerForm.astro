@@ -1,0 +1,293 @@
+---
+import Prose from "../Prose.astro";
+---
+
+<Prose>
+    <ol>
+        <li>
+            <a href="https://github.com/drtheodor/website-stickers/fork">Fork</a
+            > this repository.
+        </li>
+        <li>
+            Fill out this form
+            <form id="sticker-form">
+                <fieldset
+                    class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+                >
+                    <legend class="fieldset-legend"
+                        >Sticker JSON Generator</legend
+                    >
+
+                    <div>
+                        <label class="label">Owner*</label>
+                        <input
+                            id="sticker-owner"
+                            type="text"
+                            class="input validator"
+                            placeholder="you!"
+                            required
+                            minlength="3"
+                        />
+                        <div class="validator-hint">Enter valid value</div>
+                    </div>
+
+                    <div>
+                        <label class="label">Repository*</label>
+                        <input
+                            id="sticker-repo"
+                            type="text"
+                            class="input"
+                            value="website-stickers"
+                            required
+                            minlength="3"
+                        />
+                        <div class="validator-hint">Enter valid value</div>
+                    </div>
+
+                    <label class="label">Rotation</label>
+                    <div class="w-full max-w-xs">
+                        <input
+                            type="range"
+                            min="0"
+                            max="360"
+                            value="0"
+                            class="range"
+                            step="5"
+                            id="sticker-rotation"
+                        />
+                        <div class="flex justify-between px-2.5 mt-2 text-xs">
+                            <span>|</span>
+                            <span>|</span>
+                            <span>|</span>
+                            <span>|</span>
+                            <span>|</span>
+                            <span>|</span>
+                            <span>|</span>
+                        </div>
+                        <div class="flex justify-between px-2.5 mt-2 text-xs">
+                            <span>0</span>
+                            <span>60</span>
+                            <span>120</span>
+                            <span>180</span>
+                            <span>240</span>
+                            <span>300</span>
+                            <span>360</span>
+                        </div>
+                    </div>
+                    <label class="label">
+                        X*
+                        <input
+                            type="number"
+                            class="input grow"
+                            value="0"
+                            required
+                            min="0"
+                            max="100"
+                            id="sticker-x"
+                        />
+
+                        Y*
+                        <input
+                            type="number"
+                            class="input grow"
+                            value="0"
+                            required
+                            min="0"
+                            max="100"
+                            id="sticker-y"
+                        />
+                    </label>
+                    <label class="label">
+                        W*
+                        <input
+                            type="number"
+                            class="input grow"
+                            value="256"
+                            required
+                            min="0"
+                            max="384"
+                            id="sticker-w"
+                        />
+
+                        H*
+                        <input
+                            type="number"
+                            class="input grow"
+                            value="256"
+                            required
+                            min="0"
+                            max="384"
+                            id="sticker-h"
+                        />
+                    </label>
+                    <label class="label">Image*</label>
+                    <label class="input">
+                        URL
+                        <input
+                            type="text"
+                            class="grow"
+                            placeholder="https://imgur.com/"
+                            required
+                            id="sticker-image"
+                        />
+                    </label>
+
+                    <label class="label">Display Name</label>
+                    <input
+                        id="sticker-name"
+                        type="text"
+                        class="input"
+                        placeholder="you!"
+                        minlength="3"
+                    />
+
+                    <label class="label">Quote </label>
+                    <textarea
+                        id="sticker-quote"
+                        class="textarea"
+                        maxlength="50"
+                        placeholder="Lorem ipsum..."></textarea>
+
+                    <button id="sticker-generate" class="btn btn-neutral mt-4"
+                        >Generate</button
+                    >
+                </fieldset>
+            </form>
+        </li>
+        <li>
+            <a id="sticker-pr">Open</a> a PR.
+        </li>
+        <li>
+            <a id="sticker-delete">Delete</a> the fork (after the PR got merged).
+        </li>
+    </ol>
+</Prose>
+
+<script>
+    const generateBtn = document.getElementById(
+        "sticker-generate",
+    ) as HTMLButtonElement;
+    const prLink = document.getElementById("sticker-pr") as HTMLAnchorElement;
+    const deleteLink = document.getElementById(
+        "sticker-delete",
+    ) as HTMLAnchorElement;
+
+    const ownerInput = document.getElementById(
+        "sticker-owner",
+    ) as HTMLInputElement;
+    const repoInput = document.getElementById(
+        "sticker-repo",
+    ) as HTMLInputElement;
+
+    const rotationInput = document.getElementById(
+        "sticker-rotation",
+    ) as HTMLInputElement;
+    const xInput = document.getElementById("sticker-x") as HTMLInputElement;
+    const yInput = document.getElementById("sticker-y") as HTMLInputElement;
+    const wInput = document.getElementById("sticker-w") as HTMLInputElement;
+    const hInput = document.getElementById("sticker-h") as HTMLInputElement;
+    const imgInput = document.getElementById(
+        "sticker-image",
+    ) as HTMLInputElement;
+    const nameInput = document.getElementById(
+        "sticker-name",
+    ) as HTMLInputElement;
+    const quoteInput = document.getElementById(
+        "sticker-quote",
+    ) as HTMLTextAreaElement;
+
+    const stickerForm = document.getElementById(
+        "sticker-form",
+    ) as HTMLFormElement;
+
+    const previewStickerXForm = document.getElementById(
+        "sticker-preview-xform",
+    ) as HTMLElement;
+    const previewStickerAvatar = document.getElementById(
+        "sticker-preview-avatar",
+    ) as HTMLImageElement;
+    const previewStickerName = document.getElementById(
+        "sticker-preview-name",
+    ) as HTMLSpanElement;
+    const previewStickerImg = document.getElementById(
+        "sticker-preview-img",
+    ) as HTMLImageElement;
+    const previewStickerProfile = document.getElementById(
+        "sticker-preview-profile",
+    ) as HTMLAnchorElement;
+    const previewStickerQuote = document.getElementById(
+        "sticker-preview-quote",
+    ) as HTMLSpanElement;
+
+    let isValid = false;
+
+    stickerForm.addEventListener("change", () => {
+        isValid = stickerForm.reportValidity();
+        if (!isValid) return;
+
+        const owner = ownerInput.value;
+        const repo = repoInput.value;
+
+        prLink.href = `https://github.com/${owner}/${repo}/compare/drtheodor%3Awebsite-stickers%3Amain...main?expand=1`;
+        deleteLink.href = `https://github.com/${owner}/${repo}/settings/#dialog-show-repo-delete-menu-dialog`;
+
+        updatePreview();
+    });
+
+    function updatePreview() {
+        if (!isValid) return;
+        const position = [xInput.value, yInput.value];
+        const size = [wInput.value, hInput.value].map(parseInt);
+
+        const img = imgInput.value;
+        const rotation = rotationInput.value;
+
+        const name = nameInput.value
+            ? `~${nameInput.value}`
+            : `@${ownerInput.value}`;
+
+        previewStickerXForm.style = `left:${position[0]}%;top:${position[1]}%`;
+
+        previewStickerImg.width = size[0];
+        previewStickerImg.height = size[1];
+        previewStickerImg.src = img;
+        previewStickerImg.style = `rotate: ${rotation}deg`;
+
+        previewStickerAvatar.src = `https://avatars.githubusercontent.com/${ownerInput.value}`;
+        previewStickerName.textContent = name;
+
+        previewStickerProfile.href = `https://github.com/${ownerInput.value}`;
+
+        previewStickerQuote.textContent = quoteInput.value;
+    }
+
+    function encode(text: string) {
+        return text.replaceAll(" ", "+").replaceAll("\n", "%0A");
+    }
+
+    generateBtn.addEventListener("click", () => {
+        if (!isValid) return;
+
+        const owner = ownerInput.value;
+        const repo = repoInput.value;
+
+        const value = JSON.stringify(
+            {
+                position: [0, 0],
+                size: [256, 256],
+                rotation: 0,
+                image: "",
+                avatar: "github",
+                profile: "github",
+                quote: quoteInput.value ? quoteInput.value : null,
+            },
+            null,
+            4,
+        );
+
+        window.open(
+            `https://github.com/${owner}/${repo}/new/main?filename=${repo}.json&value=${encode(value)}`,
+            "_blank",
+        );
+    });
+</script>

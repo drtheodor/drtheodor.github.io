@@ -1,4 +1,5 @@
 ---
+import { SITE_FOOTER } from "@/config";
 import SocialLinks from "./SocialLinks.astro";
 ---
 
@@ -6,10 +7,7 @@ import SocialLinks from "./SocialLinks.astro";
     class="footer sm:footer-horizontal bg-base-100 text-neutral-content items-center p-4"
 >
     <aside class="grid-flow-col items-center">
-        <p>
-            Not so Copyright © {new Date().getFullYear()} - made with with Astro 🚀
-            and absolute incompetence.
-        </p>
+        <p>{SITE_FOOTER}</p>
     </aside>
     <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <SocialLinks />

@@ -26,7 +26,6 @@ concurrency:
 
 env:
   BUILD_PATH: "." # default value when not using subfolders
-  # BUILD_PATH: subfolder
 
 jobs:
   build:
@@ -35,6 +34,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Clone stickers
+        run: git clone https://github.com/drtheodor/website-stickers stickers
       - name: Detect package manager
         id: detect-package-manager
         run: |
