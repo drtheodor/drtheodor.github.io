@@ -1,7 +1,7 @@
 ---
 title: Minecraft Mod CI
 description: 'How we automated testing and set up various CI for our Minecraft Mod'
-pubDate: 'Mar 30 2026'
+pubDate: 'Mar 29 2026'
 heroImage: '@blog/placeholder-2.jpg'
 category: Programming
 tags:
