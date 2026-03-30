@@ -9,7 +9,7 @@ tags:
   - Minecraft
 ---
 
-(The thumbnail uses OpenJDK's Duke character which you can find [here](https://wiki.openjdk.org/spaces/duke/pages/51282071/Gallery))
+_(The thumbnail uses OpenJDK's Duke character which you can find [here](https://wiki.openjdk.org/spaces/duke/pages/51282071/Gallery), not affiliated with the OpenJDK project or Oracle)_
 
 At AmbleLabs ([GitHub](https://github.com/amblelabs), [Codeberg](https://codeberg.org/amblelabs)) we've been working hard on our first and 
 most popular Minecraft mod Adventures in Time.
