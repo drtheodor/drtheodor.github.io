@@ -6,6 +6,8 @@ heroImage: '@blog/uk-imgur.png'
 category: Programming
 ---
 
+_(Not affiliated with the British Government or Imgur)_
+
 The story went like this.
 So, a [colleague](https://github.com/addi3) of mine at [AmbleLabs](https://github.com/amblelabs) sent a message in the team chat:
 > Addie: Does anyone know any good VPN?
