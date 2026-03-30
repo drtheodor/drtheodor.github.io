@@ -10,7 +10,7 @@ tags:
   - NixOS
 ---
 
-(not affiliated with Microsoft or Mojang, NixOS art from [nixos-artwork](https://github.com/NixOS/nixos-artwork/issues/50))
+_(Not affiliated with Microsoft or Mojang, NixOS art from [nixos-artwork](https://github.com/NixOS/nixos-artwork/issues/50))_
 
 # Intro
 I've been making Minecraft mods (and plugins!) for a while (for around 4 years!) now 
