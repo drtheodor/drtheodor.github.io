@@ -137,3 +137,44 @@ You can re-open the IDE normally one.
 - Run "Minecraft Client" gradle task.
 
 ## Success!
+
+### Update March 30th of 2026
+
+Talking with [Timtaran](https://github.com/timtaran), they told be about another method of using a wrapper for IntelliJ.
+
+This allows to mod Minecraft without even making a flake, hence, this approach is a bit too impure for my taste.
+
+```nix
+{ pkgs, ... }:
+
+let
+    mc-dependencies = with pkgs; [
+        libpulseaudio
+        libGL
+        glfw3-minecraft
+        openal
+        flite
+        (lib.getLib stdenv.cc.cc)
+    ];
+in
+pkgs.symlinkJoin {
+    name = "IntelliJ Minecraft Support";
+    paths = [
+      (pkgs.jetbrains.idea.override {
+        vmopts = ''
+          -Dnosplash=true
+          -Dawt.toolkit.name=WLToolkit
+        '';
+      })
+    ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+        wrapProgram $out/bin/idea \
+        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath mc-dependencies}
+    '';
+}
+```
+
+(`-Dawt.toolkit.name=WLToolkit` is optional and turns on experimental Wayland support)
+
+Then just call it as any other package and that's about it.
