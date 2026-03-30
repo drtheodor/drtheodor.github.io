@@ -2,7 +2,7 @@
 title: Downloading IDEs and plugins from JetBrains in Russia
 description: 'A how-to guide on accessing JetBrains stuff in Russia.'
 pubDate: 'Nov 19 2025'
-heroImage: '@blog/placeholder-1.jpg'
+heroImage: '@blog/russia-jetbrains-marketplace.png'
 category: Programming
 ---
 
