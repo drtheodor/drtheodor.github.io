@@ -2,7 +2,7 @@
 title: Accessing Imgur images in UK
 description: 'A how-to guide on accessing imgur images in UK, because why not.'
 pubDate: 'Oct 09 2025'
-heroImage: '@blog/placeholder-2.jpg'
+heroImage: '@blog/uk-imgur.png'
 category: Programming
 ---
 
