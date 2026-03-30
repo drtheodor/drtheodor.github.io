@@ -2,12 +2,14 @@
 title: Optimizing Minecraft mods size
 description: 'A story about how we made our Minecraft mod 53% smaller!'
 pubDate: 'Mar 30 2026'
-heroImage: '@blog/placeholder-2.jpg'
+heroImage: '@blog/optimizing-mc-mod-size.png'
 category: Programming
 tags:
   - Java
   - Minecraft
 ---
+
+(The thumbnail uses OpenJDK's Duke character which you can find [here](https://wiki.openjdk.org/spaces/duke/pages/51282071/Gallery))
 
 At AmbleLabs ([GitHub](https://github.com/amblelabs), [Codeberg](https://codeberg.org/amblelabs)) we've been working hard on our first and 
 most popular Minecraft mod Adventures in Time.
