@@ -6,6 +6,8 @@ heroImage: '@blog/russia-jetbrains-marketplace.png'
 category: Programming
 ---
 
+_(Not affiliated with JetBrains in any way)_
+
 Downloading JetBrains stuff in Russia usually sends you to a [HTTP 451](https://en.wikipedia.org/wiki/HTTP_451) error code page.
 
 ## How to download plugins/themes
