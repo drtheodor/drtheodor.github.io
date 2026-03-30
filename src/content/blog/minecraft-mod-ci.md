@@ -2,12 +2,14 @@
 title: Minecraft Mod CI
 description: 'How we automated testing and set up various CI for our Minecraft Mod'
 pubDate: 'Mar 29 2026'
-heroImage: '@blog/placeholder-2.jpg'
+heroImage: '@blog/minecraft-mod-ci.png'
 category: Programming
 tags:
   - Java
   - Minecraft
 ---
+
+_(Not affiliated with GitHub, Mojang or Microsoft)_
 
 At AmbleLabs ([GitHub](https://github.com/amblelabs), [Codeberg](https://codeberg.org/amblelabs)) we've been working hard on our first and 
 most popular Minecraft mod Adventures in Time.
