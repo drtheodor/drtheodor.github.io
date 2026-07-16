@@ -6,6 +6,8 @@ heroImage: '@blog/placeholder-1.jpg'
 category: Programming
 ---
 
+**Read part 2 [here](/blog/hosting-a-free-maven-repo-2/).**
+
 While working on a project and waiting for it to compile on [JitPack](https://jitpack.io), I thought to myself: 
 we're already running the CI to build the project, and JitPack is running exactly the same build instructions but I have to wait more, and so do my colleagues 
 (also there were some issues with loading transitive dependencies, allegedly?).
@@ -64,3 +66,5 @@ publishing {
 ```
 
 When running this workflow it should copy over the artifacts to your GitHub maven repo, which will then build as a nice website!
+
+**Read part 2 [here](/blog/hosting-a-free-maven-repo-2/).**
