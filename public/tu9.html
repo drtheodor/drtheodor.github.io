@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TU9 Wild Facts</title>
+<style>
+  :root{
+    --bg:#0b0d12;
+    --card:#141821;
+    --card2:#1b202b;
+    --line:#252b38;
+    --text:#ece9e3;
+    --muted:#7e8798;
+    --accent:#ffb347;
+    --accent2:#ff6b4a;
+    --good:#4ecb8f;
+    --wow:#ff4d6d;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", "Inter", Arial, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino,
+                  Georgia, "Times New Roman", serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:radial-gradient(ellipse at 50% -10%, #1a2030 0%, var(--bg) 60%);
+    color:var(--text);
+    font-family:var(--font-sans);
+    display:flex;
+    justify-content:center;
+    padding:40px 16px 80px;
+    overflow-x:hidden;
+  }
+  .app{width:100%;max-width:760px;}
+
+  /* --- header --- */
+  .hud{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:32px;
+  }
+  .hud-left{
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .hud-left b{color:var(--accent);font-weight:600;}
+  .progress-dots{display:flex;gap:6px;}
+  .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--line);
+    transition:background .3s, transform .3s;
+  }
+  .dot.active{background:var(--accent);transform:scale(1.4);}
+  .dot.done{background:var(--good);}
+
+  /* --- card --- */
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:40px 36px 36px;
+    box-shadow:0 30px 80px -40px rgba(0,0,0,.9);
+    position:relative;
+    overflow:hidden;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .card:hover{transform:translateY(-2px);}
+  .card::before{
+    content:"";
+    position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    opacity:.8;
+  }
+
+  .category{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:18px;
+  }
+
+  /* --- question: modern sans --- */
+  .question{
+    font-family:var(--font-sans);
+    font-size:26px;
+    line-height:1.4;
+    font-weight:600;
+    letter-spacing:-.015em;
+    margin-bottom:28px;
+    color:#f2efe9;
+  }
+
+  /* --- reveal zone --- */
+  .reveal{
+    position:relative;
+    min-height:120px;
+  }
+
+  .reveal-btn{
+    font-family:inherit;
+    font-size:15px;font-weight:600;
+    background:var(--accent);color:#1a1206;
+    border:none;border-radius:12px;
+    padding:16px 32px;
+    cursor:pointer;
+    letter-spacing:.02em;
+    transition:transform .12s, background .2s;
+  }
+  .reveal-btn:hover{background:#ffc468;}
+  .reveal-btn:active{transform:scale(.96);}
+  .reveal-btn:disabled{opacity:.3;cursor:default;}
+
+  .answer{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+    pointer-events:none;
+  }
+  .answer.show{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+
+  /* --- big number: serif, with vertical breathing room --- */
+  .big-number{
+    font-family:var(--font-serif);
+    font-size:72px;
+    line-height:1.2;
+    font-weight:700;
+    letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;
+    padding:6px 0 2px;
+    margin-bottom:8px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .big-number .prefix,
+  .big-number .suffix{
+    font-size:32px;
+    font-weight:600;
+    letter-spacing:0;
+    -webkit-text-fill-color:var(--muted);
+  }
+
+  .answer-text{
+    font-size:16px;line-height:1.7;color:#c4bfb6;
+  }
+  .answer-text b{color:var(--text);font-weight:600;}
+
+  .comparison{
+    display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;
+  }
+  .comp-chip{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:13px;line-height:1.5;
+    color:var(--muted);
+    flex:1;min-width:140px;
+  }
+  .comp-chip b{display:block;font-size:18px;color:var(--text);margin-bottom:2px;}
+
+  /* --- wow stamp --- */
+  .wow{
+    position:absolute;top:-8px;right:24px;
+    font-size:13px;font-weight:800;
+    letter-spacing:.12em;text-transform:uppercase;
+    color:var(--wow);
+    opacity:0;
+    transform:rotate(-8deg) scale(.5);
+    transition:opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .wow.show{opacity:1;transform:rotate(-8deg) scale(1);}
+
+  /* --- nav --- */
+  .nav{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:28px;
+  }
+  .nav-btn{
+    font-family:inherit;font-size:14px;font-weight:600;
+    background:transparent;border:1px solid var(--line);
+    color:var(--muted);
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    transition:border-color .2s,color .2s,transform .12s;
+  }
+  .nav-btn:hover{border-color:#3a4254;color:var(--text);}
+  .nav-btn:active{transform:scale(.96);}
+  .nav-btn:disabled{opacity:.25;cursor:default;}
+  .nav-btn.primary{
+    background:var(--accent);border-color:var(--accent);color:#1a1206;
+  }
+  .nav-btn.primary:hover{background:#ffc468;}
+
+  /* --- end screen --- */
+  .end-screen{text-align:center;padding:60px 0 50px;}
+  .end-screen h2{
+    font-family:var(--font-serif);
+    font-size:36px;margin-bottom:0;font-weight:700;
+    letter-spacing:-.01em;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .restart-btn{
+    display:inline-block;
+    margin-top:36px;
+    font-family:inherit;
+    font-size:14px;font-weight:600;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--muted);
+    border-radius:10px;
+    padding:13px 26px;
+    cursor:pointer;
+    transition:border-color .2s,color .2s,transform .12s;
+  }
+  .restart-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .restart-btn:active{transform:scale(.96);}
+
+  /* --- confetti canvas --- */
+  #confetti{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+  }
+
+  @media (max-width:560px){
+    .card{padding:28px 20px 24px;}
+    .question{font-size:21px;}
+    .big-number{font-size:54px;}
+    .big-number .prefix,
+    .big-number .suffix{font-size:24px;}
+    .nav{flex-direction:column;gap:10px;}
+    .nav-btn{width:100%;}
+    .end-screen h2{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="app">
+  <div class="hud">
+    <div class="hud-left">TU9 <b>Wild Facts</b></div>
+    <div class="progress-dots" id="dots"></div>
+  </div>
+  <div id="stage"></div>
+</div>
+
+<script>
+/* ================================================================
+   FACTS
+   ================================================================ */
+const FACTS = [
+  {
+    category: "Money",
+    question: "How much does an engineering graduate from a German university earn in their first year?",
+    prefix: "€",
+    bigNumber: "51,800",
+    suffix: "/year",
+    wow: true,
+    text: "That is the <b>median starting salary for a Master's graduate</b> in engineering. For Bachelor's graduates it is €46,700, and for those with a doctorate it jumps to €62,600. Compare that to the average German gross salary of around €45,000 across all professions.",
+    comparison: [
+      { label: "Bachelor", value: "€46,700" },
+      { label: "Master", value: "€51,800" },
+      { label: "PhD", value: "€62,600" }
+    ]
+  },
+  {
+    category: "Cost",
+    question: "How much tuition do international students pay at most TU9 universities?",
+    prefix: "€",
+    bigNumber: "0",
+    suffix: "",
+    wow: true,
+    text: "Six of the nine TU9 universities charge <b>no tuition at all</b> for international students — only a semester fee of roughly €100–€350. The three exceptions are in Baden-Württemberg, which charges <b>€1,500 per semester</b> for non-EU students. Even then, that is a fraction of what a US or UK degree costs.",
+    comparison: [
+      { label: "Semester fee", value: "€100–350" },
+      { label: "Baden-Württemberg", value: "€1,500/sem" },
+      { label: "Private unis", value: "€10k–20k/yr" }
+    ]
+  },
+  {
+    category: "Research",
+    question: "What share of all German Research Foundation (DFG) funding in engineering goes to just nine universities?",
+    prefix: "",
+    bigNumber: "50",
+    suffix: "%",
+    wow: true,
+    text: "TU9 universities captured <b>over 50% of all DFG engineering funding</b> from 2020 to 2022. Across all disciplines, they claimed more than 21% of every DFG grant in the country. The DFG is Germany's biggest research funding body. Nine universities. Half the engineering money.",
+    comparison: [
+      { label: "All disciplines", value: "21%" },
+      { label: "Engineering", value: ">50%" },
+      { label: "Excellence Clusters", value: "33%" }
+    ]
+  },
+  {
+    category: "Scale",
+    question: "How many students are enrolled across the nine TU9 universities?",
+    prefix: "",
+    bigNumber: "280,000",
+    suffix: "+",
+    wow: false,
+    text: "That is roughly <b>10% of all students in Germany</b> crammed into nine institutions. About 56,000 of them are international students. They award approximately <b>15% of all engineering degrees</b> in the country and produce around <b>50% of all university engineering graduates</b>.",
+    comparison: [
+      { label: "Total students", value: "280,000+" },
+      { label: "International", value: "~56,000" },
+      { label: "Engineering grads", value: "~50%" }
+    ]
+  },
+  {
+    category: "Living",
+    question: "What does it actually cost to live in Germany as a student, month to month?",
+    prefix: "€",
+    bigNumber: "990",
+    suffix: "/month",
+    wow: false,
+    text: "The German Student Union puts the average at <b>€990 per month</b>. But the range is wide: Munich and Frankfurt push past €1,200, while smaller eastern cities stay under €900. Rent alone eats €300–€450. Health insurance is around €140. The famous <i>Semesterbeitrag</i> is separate — and it usually includes a free public transport pass for the whole semester.",
+    comparison: [
+      { label: "Cheap city", value: "€850–900" },
+      { label: "Average", value: "€990" },
+      { label: "Munich", value: "€1,200+" }
+    ]
+  },
+  {
+    category: "Careers",
+    question: "What share of German engineering graduates land jobs at companies like BMW, Siemens, or Bosch?",
+    prefix: "",
+    bigNumber: "70",
+    suffix: "%",
+    wow: true,
+    text: "More than <b>70% of STEM graduates</b> from German universities enter core roles at major industrial employers — automotive, electronics, chemical, and IT. TU9 universities have deep formal partnerships with Bosch, Siemens, BMW, BASF, and SAP. Many students do paid internships at €1,500–€2,500 per month before they even graduate.",
+    comparison: [
+      { label: "Industry placement", value: ">70%" },
+      { label: "Internship pay", value: "€1.5k–2.5k/mo" },
+      { label: "Employment rate", value: "~100%" }
+    ]
+  },
+  {
+    category: "Language",
+    question: "How many English-taught master's programmes do TU9 universities offer?",
+    prefix: "",
+    bigNumber: "100",
+    suffix: "+",
+    wow: false,
+    text: "You do not need fluent German to study at a top German technical university. TU9 offers <b>over 100 English-taught master's programmes</b> across all STEM fields — from AI and data science to automotive engineering and quantum computing. Some programmes require only IELTS 6.0. German helps for daily life, but it is not a barrier to entry.",
+    comparison: [
+      { label: "English master's", value: "100+" },
+      { label: "Min IELTS", value: "6.0" },
+      { label: "German required", value: "Not always" }
+    ]
+  },
+  {
+    category: "Scale",
+    question: "How much money does the German government pour into just the Excellence Clusters at TU9 universities?",
+    prefix: "€",
+    bigNumber: "539",
+    suffix: "M/year",
+    wow: true,
+    text: "TU9 universities secured <b>23 of the 70 funded Excellence Clusters</b> — 33% of the total. Those clusters alone receive <b>€539 million per year</b> for seven years. That is €3.8 billion in research funding flowing into nine technical universities. The clusters cover AI, quantum computing, battery technology, and more.",
+    comparison: [
+      { label: "Clusters won", value: "23 of 70" },
+      { label: "Annual budget", value: "€539M" },
+      { label: "Duration", value: "7 years" }
+    ]
+  }
+];
+
+/* ================================================================
+   STATE
+   ================================================================ */
+const state = { i: 0, revealed: false };
+const stage = document.getElementById("stage");
+const dotsContainer = document.getElementById("dots");
+
+/* ================================================================
+   DOTS
+   ================================================================ */
+function renderDots(){
+  dotsContainer.innerHTML = "";
+  FACTS.forEach((_, idx) => {
+    const d = document.createElement("div");
+    d.className = "dot";
+    if(idx < state.i) d.classList.add("done");
+    if(idx === state.i) d.classList.add("active");
+    dotsContainer.appendChild(d);
+  });
+}
+
+/* ================================================================
+   COUNT-UP — animates only the digits.
+   ================================================================ */
+function animateNumber(el, target, duration){
+  const start = performance.now();
+  const numericTarget = parseFloat(target);
+  const useCommas = numericTarget >= 1000;
+
+  function frame(now){
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const current = numericTarget * eased;
+
+    el.textContent = useCommas
+      ? Math.round(current).toLocaleString("en-US")
+      : Math.round(current).toString();
+
+    if(p < 1){
+      requestAnimationFrame(frame);
+    } else {
+      el.textContent = useCommas
+        ? numericTarget.toLocaleString("en-US")
+        : numericTarget.toString();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ================================================================
+   CONFETTI
+   ================================================================ */
+const confetti = (() => {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+  let rafId = null;
+  let dpr = 1;
+
+  const COLORS = ["#ffb347", "#ff6b4a", "#4ecb8f", "#ff4d6d", "#ffe66d", "#7ea6ff"];
+
+  function resize(){
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function burst(originX, originY, count){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const x0 = originX ?? w / 2;
+    const y0 = originY ?? h / 2;
+
+    for(let i = 0; i < count; i++){
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 4 + Math.random() * 12;
+      particles.push({
+        x: x0,
+        y: y0,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 6,
+        size: 5 + Math.random() * 8,
+        rot: Math.random() * Math.PI,
+        vrot: (Math.random() - 0.5) * 0.4,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        life: 1,
+        decay: 0.008 + Math.random() * 0.012,
+        shape: Math.random() < 0.65 ? "rect" : "circle"
+      });
+    }
+    if(!rafId) loop();
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    for(let i = particles.length - 1; i >= 0; i--){
+      const p = particles[i];
+      p.vy += 0.35;
+      p.vx *= 0.99;
+      p.vy *= 0.99;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vrot;
+      p.life -= p.decay;
+
+      if(p.life <= 0 || p.y > window.innerHeight + 60){
+        particles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+
+      if(p.shape === "rect"){
+        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    if(particles.length > 0){
+      rafId = requestAnimationFrame(loop);
+    } else {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      rafId = null;
+    }
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  return { burst };
+})();
+
+function celebrate(){
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  confetti.burst(w / 2, h * 0.35, 90);
+
+  setTimeout(() => confetti.burst(w * 0.15, h * 0.5, 50), 180);
+  setTimeout(() => confetti.burst(w * 0.85, h * 0.5, 50), 320);
+  setTimeout(() => confetti.burst(w * 0.5, h * 0.25, 60), 500);
+  setTimeout(() => confetti.burst(w * 0.3, h * 0.4, 40), 720);
+  setTimeout(() => confetti.burst(w * 0.7, h * 0.4, 40), 860);
+}
+
+/* ================================================================
+   RENDER
+   ================================================================ */
+function render(){
+  renderDots();
+
+  if(state.i >= FACTS.length){
+    renderEnd();
+    return;
+  }
+
+  const f = FACTS[state.i];
+  state.revealed = false;
+
+  stage.innerHTML = `
+    <div class="card">
+      <div class="category">${f.category}</div>
+      <div class="question">${f.question}</div>
+      <div class="reveal" id="reveal-zone">
+        <button class="reveal-btn" id="reveal-btn">Reveal the number →</button>
+        <div class="answer" id="answer">
+          <div class="wow" id="wow">Wow.</div>
+          <div class="big-number">
+            <span class="prefix">${f.prefix}</span><span id="num-target"></span><span class="suffix">${f.suffix}</span>
+          </div>
+          <div class="answer-text">${f.text}</div>
+          <div class="comparison">
+            ${f.comparison.map(c => `
+              <div class="comp-chip">
+                <b>${c.value}</b>
+                ${c.label}
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="nav-btn" id="prev" ${state.i === 0 ? "disabled" : ""}>← Back</button>
+      <button class="nav-btn primary" id="next" disabled>Next →</button>
+    </div>
+  `;
+
+  const btn = document.getElementById("reveal-btn");
+  const answer = document.getElementById("answer");
+  const wow = document.getElementById("wow");
+  const numTarget = document.getElementById("num-target");
+  const nextBtn = document.getElementById("next");
+
+  btn.onclick = () => {
+    if(state.revealed) return;
+    state.revealed = true;
+    btn.style.display = "none";
+    answer.classList.add("show");
+    nextBtn.disabled = false;
+
+    const raw = f.bigNumber.replace(/,/g, "");
+    animateNumber(numTarget, raw, 1200);
+
+    if(f.wow){
+      setTimeout(() => wow.classList.add("show"), 700);
+    }
+  };
+
+  nextBtn.onclick = () => {
+    if(!state.revealed) return;
+    state.i++;
+    render();
+  };
+
+  const prevBtn = document.getElementById("prev");
+  prevBtn.onclick = () => {
+    if(state.i > 0){ state.i--; render(); }
+  };
+}
+
+/* ================================================================
+   END
+   ================================================================ */
+function renderEnd(){
+  renderDots();
+  stage.innerHTML = `
+    <div class="card end-screen">
+      <h2>Thanks for listening.</h2>
+      <div>
+        <button class="restart-btn" id="restart">↻ Start over</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("restart").onclick = () => {
+    state.i = 0;
+    state.revealed = false;
+    render();
+  };
+
+  celebrate();
+}
+
+/* ================================================================
+   BOOT
+   ================================================================ */
+render();
+</script>
+</body>
+</html>
